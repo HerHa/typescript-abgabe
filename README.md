@@ -24,6 +24,7 @@
 - TypeScript "State-of-the-Art" (s. Features aus den beiden Vorlesungen)
 - REST-Schnittstelle durch Hono einschl. HTTP/2
 - GET-Requests:
+  - `GET /` liefert `{"message":"Hello World"}` (`pnpm start`, Port 3000)
 - POST-Request
 Pfad- oder Query-Parameter
 bedingte GET-Requests ("If-None-Match")
