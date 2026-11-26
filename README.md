@@ -56,6 +56,14 @@ Die OpenCollection liegt unter `bruno/web-shop-api`. In Bruno **Open Collection*
 
 Zum Durchspielen des Schreibablaufs zuerst den Server mit `pnpm start` starten und dann in Bruno die Requests der Reihe nach ausführen. Die Collection erstellt ein Testprodukt, aktualisiert es und legt eine Testbewertung an. Diese Daten bleiben in der Datenbank bestehen; es gibt derzeit keinen Delete-Endpunkt. Für eine reine Leseprobe können die GET-Requests einzeln ausgeführt werden.
 
+### Keycloak für `GET /products/:productId`
+
+Diese Route verlangt ein signiertes, nicht abgelaufenes RS256-Bearer-Token mit passendem Issuer und Audience. Die Produktliste und die übrigen Routen bleiben öffentlich. Übertrage `KEYCLOAK_ISSUER` und `KEYCLOAK_AUDIENCE` aus `.env.example` in deine lokale `.env`; `KEYCLOAK_ISSUER` muss exakt dem `iss`-Claim des Tokens entsprechen. Optional kann `KEYCLOAK_JWKS_URL` den JWKS-Endpunkt überschreiben. Der API-Server benötigt kein Client-Secret.
+
+Für den Bruno-Client braucht es zusätzlich die Keycloak-Realm-URL, eine Client-ID und das Client-Secret. In Keycloak muss für den Client **Client authentication** und **Service accounts** aktiviert sein; Bruno fordert per Client Credentials automatisch ein Token an. Damit der Server es akzeptiert, muss das Token außerdem den erwarteten Audience-Wert enthalten. Richte in Keycloak einen Audience-Mapper für `web-shop-api` ein und weise ihn dem Client als Default Client Scope zu (oder verwende deinen eigenen Audience-Namen); setze denselben Wert in `KEYCLOAK_AUDIENCE`.
+
+In Bruno die Umgebung **Local** bearbeiten: `keycloakBaseUrl`, `keycloakRealm` und `keycloakClientId` setzen sowie `keycloakClientSecret` als Secret in der Umgebung hinterlegen. Das Secret nicht in die Collection-Dateien oder Git eintragen. Danach den API-Server mit den Keycloak-Variablen starten und **Get Product** senden; Bruno holt das Token automatisch. Bei Docker muss der Keycloak-Issuer/JWKS-Endpunkt vom API-Prozess erreichbar sein und mit dem `iss`-Claim des Tokens übereinstimmen.
+
 ### Guter TypeScript-Code:
 
 - Named Exports

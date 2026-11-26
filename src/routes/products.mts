@@ -1,6 +1,7 @@
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { etagFor, matchesIfMatch, matchesIfNoneMatch } from "../http/etag.mts";
+import { keycloakAccessTokenRequired } from "../http/keycloak-auth.mts";
 import { problemResponse } from "../http/problem.mts";
 import { validationProblem } from "../http/validation.mts";
 import {
@@ -41,6 +42,7 @@ productsRouter.get(
             return validationProblem(context, result.error);
         }
     }),
+    keycloakAccessTokenRequired,
     async (context) => {
         const { productId } = context.req.valid("param");
         const product = await getProductById(productId);

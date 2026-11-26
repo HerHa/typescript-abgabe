@@ -8,3 +8,11 @@ variables:
     value: ""
   - name: productEtag
     value: ""
+  - name: keycloakBaseUrl
+    value: http://localhost:8080
+  - name: keycloakRealm
+    value: ""
+  - name: keycloakClientId
+    value: javascript-client
+  - secret: true
+    name: keycloakClientSecret
