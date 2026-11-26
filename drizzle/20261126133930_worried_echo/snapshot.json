@@ -1,0 +1,445 @@
+{
+  "type": "base",
+  "version": "9",
+  "dialect": "postgres",
+  "id": "8cdcda87-b5d4-48a1-bab5-e713ec0ac426",
+  "prevIds": [
+    "00000000-0000-0000-0000-000000000000"
+  ],
+  "footprints": [
+    {
+      "statementType": "create_table",
+      "statementTarget": [
+        "table",
+        "public",
+        "product"
+      ],
+      "writes": [
+        "s|tbl|public.product",
+        "n|tbl|public.product",
+        "e|tbl|public.product",
+        "n|rel|public.product",
+        "n|type|public.product",
+        "n|rel|public.product_pkey",
+        "n|rel|public.product_name_key"
+      ],
+      "reads": [
+        "n|sch|public"
+      ]
+    },
+    {
+      "statementType": "create_table",
+      "statementTarget": [
+        "table",
+        "public",
+        "product_detail"
+      ],
+      "writes": [
+        "s|tbl|public.product_detail",
+        "n|tbl|public.product_detail",
+        "e|tbl|public.product_detail",
+        "n|rel|public.product_detail",
+        "n|type|public.product_detail",
+        "n|rel|public.product_detail_pkey",
+        "n|rel|public.product_detail_product_id_key"
+      ],
+      "reads": [
+        "n|sch|public"
+      ]
+    },
+    {
+      "statementType": "create_table",
+      "statementTarget": [
+        "table",
+        "public",
+        "product_review"
+      ],
+      "writes": [
+        "s|tbl|public.product_review",
+        "n|tbl|public.product_review",
+        "e|tbl|public.product_review",
+        "n|rel|public.product_review",
+        "n|type|public.product_review",
+        "n|rel|public.product_review_pkey"
+      ],
+      "reads": [
+        "n|sch|public"
+      ]
+    },
+    {
+      "statementType": "create_index",
+      "statementTarget": [
+        "index",
+        "public",
+        "product_review",
+        "ix_product_review_product_id"
+      ],
+      "writes": [
+        "s|idx|public.ix_product_review_product_id",
+        "n|idx|public.ix_product_review_product_id",
+        "e|idx|public.ix_product_review_product_id",
+        "n|rel|public.ix_product_review_product_id"
+      ],
+      "reads": [
+        "n|tbl|public.product_review",
+        "n|sch|public",
+        "n|col|public.product_review.product_id"
+      ]
+    },
+    {
+      "statementType": "create_fk",
+      "statementTarget": [
+        "table",
+        "public",
+        "product_detail"
+      ],
+      "writes": [
+        "s|fk|public.product_detail.product_detail_product_id_fkey",
+        "n|fk|public.product_detail.product_detail_product_id_fkey",
+        "e|fk|public.product_detail.product_detail_product_id_fkey",
+        "n|con|public.product_detail.product_detail_product_id_fkey"
+      ],
+      "reads": [
+        "n|tbl|public.product_detail",
+        "n|sch|public",
+        "n|tbl|public.product",
+        "n|sch|public",
+        "n|col|public.product_detail.product_id",
+        "n|col|public.product.id",
+        "e|uniqueness|public.product.id"
+      ]
+    },
+    {
+      "statementType": "create_fk",
+      "statementTarget": [
+        "table",
+        "public",
+        "product_review"
+      ],
+      "writes": [
+        "s|fk|public.product_review.product_review_product_id_fkey",
+        "n|fk|public.product_review.product_review_product_id_fkey",
+        "e|fk|public.product_review.product_review_product_id_fkey",
+        "n|con|public.product_review.product_review_product_id_fkey"
+      ],
+      "reads": [
+        "n|tbl|public.product_review",
+        "n|sch|public",
+        "n|tbl|public.product",
+        "n|sch|public",
+        "n|col|public.product_review.product_id",
+        "n|col|public.product.id",
+        "e|uniqueness|public.product.id"
+      ]
+    }
+  ],
+  "ddl": [
+    {
+      "schema": "public",
+      "name": "product",
+      "isRlsEnabled": false,
+      "entityType": "tables"
+    },
+    {
+      "schema": "public",
+      "name": "product_detail",
+      "isRlsEnabled": false,
+      "entityType": "tables"
+    },
+    {
+      "schema": "public",
+      "name": "product_review",
+      "isRlsEnabled": false,
+      "entityType": "tables"
+    },
+    {
+      "schema": "public",
+      "table": "product",
+      "name": "id",
+      "type": "serial",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "product_detail",
+      "name": "id",
+      "type": "serial",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "product_review",
+      "name": "id",
+      "type": "serial",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "product_detail",
+      "name": "product_id",
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "product",
+      "name": "name",
+      "type": "varchar(100)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "product_review",
+      "name": "product_id",
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "product_review",
+      "name": "rating",
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "product_detail",
+      "name": "material",
+      "type": "varchar(100)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "product",
+      "name": "description",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "product",
+      "name": "price",
+      "type": "numeric(10,2)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "product_detail",
+      "name": "dimensions",
+      "type": "varchar(100)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "product_review",
+      "name": "comment",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "product",
+      "name": "stock",
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "product",
+      "name": "version",
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "1",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "product_review",
+      "name": "ix_product_review_product_id",
+      "nameExplicit": true,
+      "columns": [
+        {
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null,
+          "isExpression": false,
+          "value": "product_id"
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "concurrently": false,
+      "entityType": "indexes"
+    },
+    {
+      "schema": "public",
+      "table": "product_detail",
+      "name": "product_detail_product_id_fkey",
+      "nameExplicit": true,
+      "columns": [
+        "product_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "product",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "CASCADE",
+      "entityType": "fks"
+    },
+    {
+      "schema": "public",
+      "table": "product_review",
+      "name": "product_review_product_id_fkey",
+      "nameExplicit": true,
+      "columns": [
+        "product_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "product",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "CASCADE",
+      "entityType": "fks"
+    },
+    {
+      "schema": "public",
+      "table": "product",
+      "name": "product_pkey",
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": true,
+      "entityType": "pks"
+    },
+    {
+      "schema": "public",
+      "table": "product_detail",
+      "name": "product_detail_pkey",
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": true,
+      "entityType": "pks"
+    },
+    {
+      "schema": "public",
+      "table": "product_review",
+      "name": "product_review_pkey",
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": true,
+      "entityType": "pks"
+    },
+    {
+      "schema": "public",
+      "table": "product",
+      "name": "product_name_key",
+      "nameExplicit": true,
+      "columns": [
+        "name"
+      ],
+      "nullsNotDistinct": false,
+      "entityType": "uniques"
+    },
+    {
+      "schema": "public",
+      "table": "product_detail",
+      "name": "product_detail_product_id_key",
+      "nameExplicit": true,
+      "columns": [
+        "product_id"
+      ],
+      "nullsNotDistinct": false,
+      "entityType": "uniques"
+    }
+  ]
+}
