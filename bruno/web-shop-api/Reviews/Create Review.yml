@@ -1,0 +1,30 @@
+info:
+  name: Create Review (writes to database)
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/products/{{productId}}/reviews"
+  headers:
+    - name: content-type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "rating": 5,
+        "comment": "Test review created by the Bruno collection"
+      }
+  auth:
+    type: none
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("creates a review for the selected product", function() {
+          expect(res.status).to.equal(201);
+          expect(res.body.productId).to.be.a("number").and.greaterThan(0);
+          expect(res.body.rating).to.equal(5);
+        });

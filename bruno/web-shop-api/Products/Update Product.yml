@@ -1,0 +1,42 @@
+info:
+  name: Update Product (writes to database)
+  type: http
+  seq: 6
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/products/{{productId}}"
+  headers:
+    - name: content-type
+      value: application/json
+    - name: If-Match
+      value: "{{productEtag}}"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Bruno updated test product {{$guid}}",
+        "description": "Updated by the Bruno collection",
+        "price": "24.99",
+        "stock": 4,
+        "detail": {
+          "material": "Recycled cotton",
+          "dimensions": "12 x 12 cm"
+        }
+      }
+  auth:
+    type: none
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        if (res.status === 200) {
+          bru.setVar("productEtag", res.getHeader("etag"));
+        }
+    - type: tests
+      code: |-
+        test("updates the product with the current ETag", function() {
+          expect(res.status).to.equal(200);
+          expect(res.getHeader("etag")).to.be.a("string");
+        });

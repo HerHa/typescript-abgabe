@@ -1,0 +1,41 @@
+info:
+  name: Create Test Product (writes to database)
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{baseUrl}}/products"
+  headers:
+    - name: content-type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Bruno test product {{$guid}}",
+        "description": "A test product created by the Bruno collection",
+        "price": "19.99",
+        "stock": 5,
+        "detail": {
+          "material": "Cotton",
+          "dimensions": "10 x 10 cm"
+        }
+      }
+  auth:
+    type: none
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        if (res.status === 201) {
+          bru.setVar("productId", String(res.body.id));
+        }
+    - type: tests
+      code: |-
+        test("creates a product and returns its ID and Location", function() {
+          expect(res.status).to.equal(201);
+          expect(res.body.id).to.exist;
+          expect(res.getHeader("location")).to.equal(`/products/${res.body.id}`);
+        });

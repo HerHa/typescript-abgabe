@@ -1,0 +1,10 @@
+name: Local
+variables:
+  - name: baseUrl
+    value: http://localhost:3000
+  - name: productId
+    value: "1"
+  - name: listEtag
+    value: ""
+  - name: productEtag
+    value: ""

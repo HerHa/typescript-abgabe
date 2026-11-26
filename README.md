@@ -50,6 +50,12 @@
 - oxlint
 - oxfmt
 
+### Bruno-Collection
+
+Die OpenCollection liegt unter `bruno/web-shop-api`. In Bruno **Open Collection** wählen und diesen Ordner öffnen; anschließend die Umgebung **Local** aktivieren. Sie verwendet standardmäßig `http://localhost:3000` und enthält Requests für alle Endpunkte, inklusive ETag/304- und If-Match-Ablauf.
+
+Zum Durchspielen des Schreibablaufs zuerst den Server mit `pnpm start` starten und dann in Bruno die Requests der Reihe nach ausführen. Die Collection erstellt ein Testprodukt, aktualisiert es und legt eine Testbewertung an. Diese Daten bleiben in der Datenbank bestehen; es gibt derzeit keinen Delete-Endpunkt. Für eine reine Leseprobe können die GET-Requests einzeln ausgeführt werden.
+
 ### Guter TypeScript-Code:
 
 - Named Exports
