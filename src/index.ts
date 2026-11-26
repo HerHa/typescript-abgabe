@@ -1,16 +1,11 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
-import { db } from "./db/client.mts";
-import { productTable } from "./db/schema.mts";
+import { productsRouter } from "./routes/products.mts";
 
 const app = new Hono();
 
 app.get("/", (context) => context.json({ message: "Hello World" }));
-
-app.get("/products", async (context) => {
-    const products = await db.select().from(productTable);
-    return context.json(products);
-});
+app.route("/products", productsRouter);
 
 serve({
     fetch: app.fetch,

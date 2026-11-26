@@ -26,6 +26,7 @@
 - GET-Requests:
   - `GET /` liefert `{"message":"Hello World"}` (`pnpm start`, Port 3000)
   - `GET /products` liefert die Produkte aus `web_shop.public.product` als JSON
+- DB-Verbindung und Schema liegen in `src/db`, Produktlogik in `src/services`, HTTP-Routen in `src/routes`
 - POST-Request
 Pfad- oder Query-Parameter
 bedingte GET-Requests ("If-None-Match")
