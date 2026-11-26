@@ -25,6 +25,7 @@
 - REST-Schnittstelle durch Hono einschl. HTTP/2
 - GET-Requests:
   - `GET /` liefert `{"message":"Hello World"}` (`pnpm start`, Port 3000)
+  - `GET /products` liefert die Produkte aus `web_shop.public.product` als JSON
 - POST-Request
 Pfad- oder Query-Parameter
 bedingte GET-Requests ("If-None-Match")
